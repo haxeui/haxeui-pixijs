@@ -1,4 +1,4 @@
-package haxe.ui.pixi;
+package haxe.ui.backend.pixi;
 
 import haxe.ui.Toolkit;
 import haxe.ui.assets.ImageInfo;

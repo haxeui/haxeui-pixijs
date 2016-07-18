@@ -1,10 +1,10 @@
-package haxe.ui.core;
+package haxe.ui.backend;
 
 import haxe.ui.containers.dialogs.Dialog;
 import haxe.ui.containers.dialogs.DialogButton;
 import haxe.ui.core.Component;
 import haxe.ui.core.UIEvent;
-import haxe.ui.pixi.EventMapper;
+import haxe.ui.backend.pixi.EventMapper;
 import pixi.core.display.Container;
 import pixi.core.renderers.Detector;
 import pixi.core.renderers.SystemRenderer;

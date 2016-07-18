@@ -1,4 +1,4 @@
-package haxe.ui.pixi;
+package haxe.ui.backend.pixi;
 
 class EventMapper {
     public static var PIXI_TO_HAXEUI:Map<String, String> = [

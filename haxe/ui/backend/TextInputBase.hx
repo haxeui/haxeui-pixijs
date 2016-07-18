@@ -1,4 +1,4 @@
-package haxe.ui.core;
+package haxe.ui.backend;
 
 class TextInputBase extends TextDisplayBase {
     public function new() {

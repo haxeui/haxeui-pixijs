@@ -1,4 +1,4 @@
-package haxe.ui.pixi;
+package haxe.ui.backend.pixi;
 
 import pixi.core.display.DisplayObject;
 

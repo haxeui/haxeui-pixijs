@@ -1,4 +1,4 @@
-package haxe.ui.pixi;
+package haxe.ui.backend.pixi;
 
 class HtmlUtils {
     public static function px(value:Float) {

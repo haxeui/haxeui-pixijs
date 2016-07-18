@@ -1,4 +1,4 @@
-package haxe.ui.core;
+package haxe.ui.backend;
 
 import haxe.ui.core.Component;
 import haxe.ui.core.ImageDisplay;
@@ -6,9 +6,9 @@ import haxe.ui.core.MouseEvent;
 import haxe.ui.core.TextDisplay;
 import haxe.ui.core.TextInput;
 import haxe.ui.core.UIEvent;
-import haxe.ui.pixi.EventMapper;
-import haxe.ui.pixi.HaxeUIPixiGraphics;
-import haxe.ui.pixi.PixiStyleHelper;
+import haxe.ui.backend.pixi.EventMapper;
+import haxe.ui.backend.pixi.HaxeUIPixiGraphics;
+import haxe.ui.backend.pixi.PixiStyleHelper;
 import haxe.ui.styles.Style;
 import haxe.ui.util.Rectangle;
 import pixi.core.display.DisplayObject;

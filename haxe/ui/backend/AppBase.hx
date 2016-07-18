@@ -1,4 +1,4 @@
-package haxe.ui;
+package haxe.ui.backend;
 
 import js.Browser;
 import pixi.core.graphics.Graphics;

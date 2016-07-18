@@ -1,6 +1,6 @@
-package haxe.ui.core;
+package haxe.ui.backend;
 
-import haxe.ui.pixi.HtmlUtils;
+import haxe.ui.backend.pixi.HtmlUtils;
 import pixi.core.text.Text;
 
 class TextDisplayBase extends Text {

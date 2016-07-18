@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <module>
     <resources>
-        <resource path="/haxe/ui/pixi/_module/styles" prefix="styles" />
+        <resource path="/haxe/ui/backend/pixi/_module/styles" prefix="styles" />
     </resources>
     <themes>
         <global>
