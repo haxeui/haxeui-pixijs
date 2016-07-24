@@ -8,6 +8,11 @@
 <h2>haxeui-pixijs</h2>
 `haxeui-pixijs` is the `PixiJS` backend for HaxeUI.
 
+<p align="center">
+	<img src="https://github.com/haxeui/haxeui-pixijs/raw/master/screen.png" />
+</p>
+
+
 <h2>Installation</h2>
  * `haxeui-pixijs` has a dependency to <a href="https://github.com/haxeui/haxeui-core">`haxeui-core`</a>, and so that too must be installed.
  * `haxeui-pixijs` also has a dependency to <a href="https://github.com/pixijs/pixi-haxe">pixi-haxe</a> (the `PixiJS` Haxe externs), please refer to the installation instructions on their <a href="https://github.com/pixijs/pixi-haxe">site</a>.
