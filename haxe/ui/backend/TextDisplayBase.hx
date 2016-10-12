@@ -2,9 +2,10 @@ package haxe.ui.backend;
 
 import haxe.ui.backend.pixi.HtmlUtils;
 import pixi.core.text.Text;
+import pixi.core.text.TextStyleObject;
 
 class TextDisplayBase extends Text {
-    private var _style:TextStyle = { };
+    private var _style:TextStyleObject = { };
 
     public function new() {
         super("");
@@ -76,7 +77,7 @@ class TextDisplayBase extends Text {
     }
 
     private function updateFont() {
-        _style.font = "normal " + HtmlUtils.px(_fontSize) + " " + _fontName;
+        _style.fontFamily = "normal " + HtmlUtils.px(_fontSize) + " " + _fontName;
         this.style = _style;
     }
 }
