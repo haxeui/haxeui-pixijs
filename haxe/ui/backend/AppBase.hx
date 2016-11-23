@@ -72,6 +72,9 @@ class AppBase {
 
         var renderer:SystemRenderer = null;
         var options:RenderingOptions = {};
+        options.backgroundColor = parseCol(Toolkit.backendProperties.getProp("haxe.ui.pixi.background.color", "0xFFFFFF"));
+        options.resolution = 1;
+        
         #if canvas
             renderer = new CanvasRenderer(width, height, options);
         #elseif webgl

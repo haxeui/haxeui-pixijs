@@ -35,6 +35,7 @@ class PixiStyleHelper {
         }
 
         var borderSize:Rectangle = new Rectangle();
+        var hasBorder:Bool = false;
         if (style.borderLeftSize != null
             && style.borderLeftSize == style.borderRightSize
             && style.borderLeftSize == style.borderBottomSize
@@ -49,6 +50,7 @@ class PixiStyleHelper {
                 borderSize.top = style.borderLeftSize;
                 borderSize.bottom = style.borderLeftSize;
                 borderSize.right = style.borderLeftSize;
+                hasBorder = true;
         } else {
             if ((style.borderTopSize != null && style.borderTopSize > 0)
                 || (style.borderBottomSize != null && style.borderBottomSize > 0)
@@ -91,6 +93,8 @@ class PixiStyleHelper {
                     borderSize.right = 1;
                     rc.right -= 1;
                 }
+                
+                hasBorder = true;
             }
         }
 
@@ -104,11 +108,12 @@ class PixiStyleHelper {
         if (borderRadius >= rc.height) {
             borderRadius = Math.fceil(rc.height / 2);
         } else if (borderRadius > 2) {
-            //trace(borderRadius);
             borderRadius--;
         }
 
+        var hasFill:Bool = false;
         if (style.backgroundColor != null) {
+            hasFill = true;
             if (style.backgroundColorEnd != null && style.backgroundColor != style.backgroundColorEnd) {
                 graphics.beginFill(style.backgroundColor, 1);
 
@@ -166,10 +171,12 @@ class PixiStyleHelper {
             }
         }
 
-        if (borderRadius == 0) {
-            graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
-        } else {
-            graphics.drawRoundedRect(rc.left, rc.top, rc.width, rc.height, borderRadius);
+        if (hasBorder == true || hasFill == true) {
+            if (borderRadius == 0) {
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
+            } else {
+                graphics.drawRoundedRect(rc.left, rc.top, rc.width, rc.height, borderRadius);
+            }
         }
 
         graphics.endFill();

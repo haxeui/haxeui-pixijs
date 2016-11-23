@@ -11,7 +11,7 @@ class TextDisplayBase extends Text {
         super("");
         scale = new pixi.core.math.Point(1, 1);
         this.style = _style;
-        this.fontName = "Tahoma";
+        this.fontName = "Arial";
         this.fontSize = 13;
     }
 
@@ -45,7 +45,7 @@ class TextDisplayBase extends Text {
 
     public var color(get, set):Int;
     private function get_color():Int {
-        return 0;// _style.fill;
+        return _style.fill;
     }
     private function set_color(value:Int):Int {
         _style.fill = HtmlUtils.color(value);
@@ -54,7 +54,7 @@ class TextDisplayBase extends Text {
         return value;
     }
 
-    private var _fontName:String = "Tahoma";
+    private var _fontName:String = "Arial";
     public var fontName(get, set):String;
     private function get_fontName():String {
         return _fontName;
@@ -77,7 +77,8 @@ class TextDisplayBase extends Text {
     }
 
     private function updateFont() {
-        _style.fontFamily = "normal " + HtmlUtils.px(_fontSize) + " " + _fontName;
+        _style.fontFamily = _fontName;
+        _style.fontSize = _fontSize;
         this.style = _style;
     }
 }
