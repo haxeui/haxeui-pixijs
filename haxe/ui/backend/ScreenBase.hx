@@ -28,6 +28,11 @@ class ScreenBase {
         return renderer.height;
     }
 
+    public var dpi(get, null):Float;
+    private function get_dpi():Float {
+        return 72;
+    }
+    
     public var options(get, set):Dynamic;
     private function get_options():Dynamic {
         return null;
@@ -67,6 +72,7 @@ class ScreenBase {
     }
 
     public function addComponent(component:Component) {
+        component.scale.set(Toolkit.scaleX, Toolkit.scaleY);
         resizeComponent(component);
         _stage.addChild(component);
     }
