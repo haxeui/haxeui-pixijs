@@ -150,8 +150,8 @@ class ScreenBase {
             var fn = _mapping.get(type);
             if (fn != null) {
                 var mouseEvent = new haxe.ui.core.MouseEvent(type);
-                mouseEvent.screenX = event.data.global.x;
-                mouseEvent.screenY = event.data.global.y;
+                mouseEvent.screenX = event.data.global.x / Toolkit.scaleX;
+                mouseEvent.screenY = event.data.global.y / Toolkit.scaleY;
                 fn(mouseEvent);
             }
         }
