@@ -32,7 +32,7 @@ class ScreenBase {
     private function get_dpi():Float {
         return 72;
     }
-    
+
     public var options(get, set):Dynamic;
     private function get_options():Dynamic {
         return null;
@@ -91,9 +91,9 @@ class ScreenBase {
     }
 
     private function handleSetComponentIndex(child:Component, index:Int) {
-        
+
     }
-    
+
     //***********************************************************************************************************
     // Dialogs
     //***********************************************************************************************************

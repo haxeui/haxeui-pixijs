@@ -243,9 +243,9 @@ class ComponentBase extends HaxeUIPixiGraphics {
     }
 
     private function handleSetComponentIndex(child:Component, index:Int) {
-        
+
     }
-    
+
     //***********************************************************************************************************
     // Events
     //***********************************************************************************************************

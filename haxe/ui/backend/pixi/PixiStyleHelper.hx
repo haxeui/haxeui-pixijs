@@ -93,7 +93,7 @@ class PixiStyleHelper {
                     borderSize.right = 1;
                     rc.right -= 1;
                 }
-                
+
                 hasBorder = true;
             }
         }
