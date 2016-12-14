@@ -76,6 +76,14 @@ class TextDisplayBase extends Text {
         return value;
     }
 
+    public var textAlign(get, set):Null<String>;
+    private function get_textAlign():Null<String> {
+        return null;
+    }
+    private function set_textAlign(value:Null<String>):Null<String> {
+        return value;
+    }
+    
     private function updateFont() {
         _style.fontFamily = _fontName;
         _style.fontSize = _fontSize;
