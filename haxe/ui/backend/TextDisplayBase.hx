@@ -83,7 +83,7 @@ class TextDisplayBase extends Text {
     private function set_textAlign(value:Null<String>):Null<String> {
         return value;
     }
-    
+
     private function updateFont() {
         _style.fontFamily = _fontName;
         _style.fontSize = _fontSize;
