@@ -2,10 +2,10 @@ package haxe.ui.backend;
 
 import haxe.ui.backend.pixi.HtmlUtils;
 import pixi.core.text.Text;
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.TextStyle;
 
 class TextDisplayBase extends Text {
-    private var _style:TextStyleObject = { };
+    private var _style:TextStyle = new TextStyle();
 
     public function new() {
         super("");
