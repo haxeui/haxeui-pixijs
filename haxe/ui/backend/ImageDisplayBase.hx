@@ -1,5 +1,6 @@
 package haxe.ui.backend;
 
+import haxe.ui.util.Rectangle;
 import haxe.ui.assets.ImageInfo;
 import haxe.ui.core.Component;
 import js.html.*;
@@ -74,6 +75,24 @@ class ImageDisplayBase extends Sprite {
         if (texture != null) {
             texture.destroy;
         }
+    }
+
+    public var imageClipRect(get, set):Rectangle;
+    private var _imageClipRect:Rectangle;
+    public function get_imageClipRect():Rectangle {
+        return _imageClipRect;
+    }
+    private function set_imageClipRect(value:Rectangle):Rectangle {
+        _imageClipRect = value;
+
+        //TODO
+        if(value == null) {
+
+        } else {
+
+        }
+
+        return value;
     }
 
 }
