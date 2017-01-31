@@ -2,8 +2,8 @@ package haxe.ui.backend;
 
 import js.Browser;
 import pixi.core.graphics.Graphics;
+import pixi.core.RenderOptions;
 import pixi.core.renderers.Detector;
-import pixi.core.renderers.Detector.RenderingOptions;
 import pixi.core.renderers.SystemRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
@@ -24,7 +24,7 @@ class AppBase {
         _stage.drawRect(0, 0, width, height);
         _stage.endFill();
 
-        var options:RenderingOptions = {};
+        var options:RenderOptions = {};
         options.backgroundColor = parseCol(Toolkit.backendProperties.getProp("haxe.ui.pixi.background.color", "0xFFFFFF"));
         options.resolution = 1;
 
@@ -71,7 +71,7 @@ class AppBase {
         var height:Int = Toolkit.backendProperties.getPropInt("haxe.ui.pixi.height", 600);
 
         var renderer:SystemRenderer = null;
-        var options:RenderingOptions = {};
+        var options:RenderOptions = {};
         options.backgroundColor = parseCol(Toolkit.backendProperties.getProp("haxe.ui.pixi.background.color", "0xFFFFFF"));
         options.resolution = 1;
 
