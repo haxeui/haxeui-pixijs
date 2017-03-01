@@ -78,7 +78,7 @@ class ScreenBase {
     }
 
     public function removeComponent(component:Component) {
-
+        _stage.removeChild(component);
     }
 
     private function resizeComponent(c:Component) {
