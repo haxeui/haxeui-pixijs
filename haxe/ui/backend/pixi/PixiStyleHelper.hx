@@ -114,8 +114,9 @@ class PixiStyleHelper {
         var hasFill:Bool = false;
         if (style.backgroundColor != null) {
             hasFill = true;
+            var backgroundOpacity = (style.backgroundOpacity == null) ? 1.0 : style.backgroundOpacity;
             if (style.backgroundColorEnd != null && style.backgroundColor != style.backgroundColorEnd) {
-                graphics.beginFill(style.backgroundColor, 1);
+                graphics.beginFill(style.backgroundColor, backgroundOpacity);
 
                 if (Toolkit.screen.isCanvas == true) { // probably not very effecient
                     for (c in graphics.children) {
@@ -167,7 +168,7 @@ class PixiStyleHelper {
                     }
                 }
 
-                graphics.beginFill(style.backgroundColor, 1);
+                graphics.beginFill(style.backgroundColor, backgroundOpacity);
             }
         }
 
