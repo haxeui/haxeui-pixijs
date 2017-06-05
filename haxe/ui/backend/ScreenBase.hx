@@ -71,6 +71,8 @@ class ScreenBase {
         return value;
     }
 
+    public var title:String;
+
     public function addComponent(component:Component) {
         component.scale.set(Toolkit.scaleX, Toolkit.scaleY);
         resizeComponent(component);
