@@ -71,6 +71,15 @@ class ScreenBase {
         return value;
     }
 
+    public var title(get,set):String;
+    private inline function get_title():String {
+        return js.Browser.document.title;
+    }
+    private inline function set_title(s:String):String {
+        js.Browser.document.title = s;
+        return s;
+    }
+
     public function addComponent(component:Component) {
         component.scale.set(Toolkit.scaleX, Toolkit.scaleY);
         resizeComponent(component);
