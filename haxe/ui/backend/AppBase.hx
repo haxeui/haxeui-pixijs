@@ -87,7 +87,7 @@ class AppBase {
                 case "webgl":
                     renderer = new WebGLRenderer(width, height, options);
                 default:
-                    renderer = Detector.autoDetectRenderer(width, height, options);
+                    renderer = Detector.autoDetectRenderer(options, width, height);
             }
         #end
 

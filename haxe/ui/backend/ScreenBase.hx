@@ -41,7 +41,7 @@ class ScreenBase {
     public var renderer(get, null):SystemRenderer;
     public function get_renderer():SystemRenderer {
         if (_renderer == null) {
-            _renderer = Detector.autoDetectRenderer(0, 0, {});
+            _renderer = Detector.autoDetectRenderer(null, 0, 0);
         }
         return _renderer;
     }
