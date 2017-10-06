@@ -32,7 +32,6 @@ class TextDisplayBase {
 
     private function validateData() {
         textField.text = _text;
-        trace(_text + ", " + textField.width);
     }
     
     private function validateStyle():Bool {
