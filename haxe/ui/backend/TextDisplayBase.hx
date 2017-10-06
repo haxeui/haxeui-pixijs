@@ -10,6 +10,7 @@ class TextDisplayBase extends Text {
     public function new() {
         super("");
         scale = new pixi.core.math.Point(1, 1);
+        //this.style.wordWrap = true;
     }
 
     public var textWidth(get, null):Float;
