@@ -5,51 +5,70 @@ import haxe.ui.styles.Style;
 import pixi.core.text.Text;
 import pixi.core.text.TextStyle;
 
-class TextDisplayBase extends Text {
+class TextDisplayBase {
 
+    public var textField:Text;
+    
     public function new() {
-        super("");
-        scale = new pixi.core.math.Point(1, 1);
+        textField = new Text("");
+        textField.scale = new pixi.core.math.Point(1, 1);
         //this.style.wordWrap = true;
     }
 
-    public var textWidth(get, null):Float;
-    private function get_textWidth():Float {
-        return this.width;
-    }
+    private var _text:String;
+    private var _left:Float = 0;
+    private var _top:Float = 0;
+    private var _width:Float = 0;
+    private var _height:Float = 0;
+    private var _textWidth:Float = 0;
+    private var _textHeight:Float = 0;
+    private var _textStyle:Style;
+    private var _multiline:Bool = true;
+    private var _wordWrap:Bool = false;
 
-    public var textHeight(get, null):Float;
-    private function get_textHeight():Float {
-        return this.height;
-    }
+    //***********************************************************************************************************
+    // Validation functions
+    //***********************************************************************************************************
 
-    public var left(get, set):Float;
-    private function get_left():Float {
-        return this.x;
+    private function validateData() {
+        textField.text = _text;
+        trace(_text + ", " + textField.width);
     }
-    private function set_left(value:Float):Float {
-        this.x = value;
-        return value;
-    }
-
-    public var top(get, set):Float;
-    private function get_top():Float {
-        return this.y;
-    }
-    private function set_top(value:Float):Float {
-        this.y = value;
-        return value;
-    }
-
-    public function applyStyle(style:Style) {
-        if (style.color != null) {
-            this.style.fill = HtmlUtils.color(style.color);
+    
+    private function validateStyle():Bool {
+        var measureTextRequired:Bool = true;
+        
+        if (_textStyle.color != null) {
+            textField.style.fill = HtmlUtils.color(_textStyle.color);
         }
-        if (style.fontName != null) {
-            this.style.fontFamily = style.fontName;
+        if (_textStyle.fontName != null) {
+            textField.style.fontFamily = _textStyle.fontName;
+            measureTextRequired = true;
         }
-        if (style.fontSize != null) {
-            this.style.fontSize = Std.parseFloat(style.fontSize);
+        if (_textStyle.fontSize != null) {
+            textField.style.fontSize = Std.parseFloat(_textStyle.fontSize);
+            measureTextRequired = true;
         }
+        
+        if (textField.style.wordWrap != _wordWrap) {
+            textField.style.wordWrap = _wordWrap;
+
+            measureTextRequired = true;
+        }
+
+        return measureTextRequired;
+    }
+    
+    private function validatePosition() {
+        textField.x = _left;
+        textField.y = _top;
+    }
+    
+    private function validateDisplay() {
+    }
+    
+    private function measureText() {
+        _textWidth = textField.width;
+        _textHeight = textField.height;
     }
 }

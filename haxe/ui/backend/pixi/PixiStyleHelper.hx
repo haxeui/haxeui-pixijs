@@ -177,7 +177,7 @@ class PixiStyleHelper {
                 graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
             } else {
                 //graphics.drawRoundedRect(rc.left, rc.top, rc.width, rc.height, borderRadius);
-                graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height); // looks better
             }
         }
 

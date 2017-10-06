@@ -71,15 +71,15 @@ class ComponentBase extends HaxeUIPixiGraphics {
             n++;
         }
         if (hasTextDisplay() == true) {
-            this.setChildIndex(_textDisplay, n);
+            this.setChildIndex(_textDisplay.textField, n);
             n++;
         } else if (hasTextInput() == true) {
-            this.setChildIndex(_textInput, n);
+            this.setChildIndex(_textInput.textField, n);
             n++;
         }
 
         if (hasImageDisplay() == true) {
-            this.setChildIndex(_imageDisplay, n);
+            this.setChildIndex(_imageDisplay.sprite, n);
             n++;
         }
 
@@ -131,8 +131,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
     public function createTextDisplay(text:String = null):TextDisplay {
         if (_textDisplay == null) {
             _textDisplay = new TextDisplay();
-            _textDisplay.name = "text-display";
-            addChild(_textDisplay);
+            _textDisplay.textField.name = "text-display";
+            addChild(_textDisplay.textField);
         }
         if (text != null) {
             _textDisplay.text = text;
@@ -153,8 +153,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
     public function createTextInput(text:String = null):TextInput {
         if (_textInput == null) {
             _textInput = new TextInput();
-            _textInput.name = "text-input";
-            addChild(_textInput);
+            _textInput.textField.name = "text-input";
+            addChild(_textInput.textField);
         }
         if (text != null) {
             _textInput.text = text;
@@ -177,8 +177,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
     public function createImageDisplay():ImageDisplay {
         if (_imageDisplay == null) {
             _imageDisplay = new ImageDisplay();
-            _imageDisplay.name = "image-display";
-            addChild(_imageDisplay);
+            _imageDisplay.sprite.name = "image-display";
+            addChild(_imageDisplay.sprite);
         }
         /*
         if (resource != null) {
@@ -199,8 +199,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
 
     public function removeImageDisplay():Void {
         if (_imageDisplay != null) {
-            if (getChildIndex(_imageDisplay) > -1) {
-                removeChild(_imageDisplay);
+            if (getChildIndex(_imageDisplay.sprite) > -1) {
+                removeChild(_imageDisplay.sprite);
             }
             _imageDisplay.dispose();
             _imageDisplay = null;

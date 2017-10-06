@@ -7,92 +7,56 @@ import js.html.*;
 import pixi.core.sprites.Sprite;
 
 
-class ImageDisplayBase extends Sprite {
+class ImageDisplayBase {
+    public var parentComponent:Component;
+    public var aspectRatio:Float = 1; // width x height
+    public var sprite:Sprite;
+    
     public function new() {
-        super(null);
+        sprite = new Sprite();
     }
 
     private var _left:Float = 0;
     private var _top:Float = 0;
-    private var _imageWidth:Float = -1;
-    private var _imageHeight:Float = -1;
-
-    public var parentComponent:Component;
-    public var aspectRatio:Float = 1; // width x height
-
-    public var left(get, set):Float;
-    private function get_left():Float {
-        return _left;
-    }
-    private function set_left(value:Float):Float {
-        _left = value;
-        return value;
-    }
-
-    public var top(get, set):Float;
-    private function get_top():Float {
-        return _top;
-    }
-    private function set_top(value:Float):Float {
-        _top = value;
-        return value;
-    }
-
-    public var imageWidth(get, set):Float;
-    private function set_imageWidth(value:Float):Float {
-        return value;
-    }
-
-    private function get_imageWidth():Float {
-        return _imageWidth;
-    }
-
-    public var imageHeight(get, set):Float;
-    private function set_imageHeight(value:Float):Float {
-        return value;
-    }
-
-    private function get_imageHeight():Float {
-        return _imageHeight;
-    }
-
-
+    private var _imageWidth:Float = 0;
+    private var _imageHeight:Float = 0;
     private var _imageInfo:ImageInfo;
-    public var imageInfo(get, set):ImageInfo;
-    private function get_imageInfo():ImageInfo {
-        return _imageInfo;
-    }
-    private function set_imageInfo(value:ImageInfo):ImageInfo {
-        _imageInfo = value;
-        this.texture = _imageInfo.data;
-        _imageWidth = _imageInfo.width;
-        _imageHeight = _imageInfo.height;
-        aspectRatio = _imageInfo.width / _imageInfo.height;
-        return value;
-    }
-
-    public function dispose():Void {
-        if (texture != null) {
-            texture.destroy;
-        }
-    }
-
-    public var imageClipRect(get, set):Rectangle;
     private var _imageClipRect:Rectangle;
-    public function get_imageClipRect():Rectangle {
-        return _imageClipRect;
+    
+    public function dispose():Void {
+        if (sprite.texture != null) {
+            sprite.texture.destroy();
+        }
     }
-    private function set_imageClipRect(value:Rectangle):Rectangle {
-        _imageClipRect = value;
 
-        //TODO
-        if(value == null) {
+    //***********************************************************************************************************
+    // Validation functions
+    //***********************************************************************************************************
 
-        } else {
-
+    private function validateData() {
+        if (_imageInfo != null) {
+            sprite.texture = _imageInfo.data;
+            _imageWidth = _imageInfo.width;
+            _imageHeight = _imageInfo.height;
+            aspectRatio = _imageInfo.width / _imageInfo.height;
+        }
+    }
+    
+    private function validatePosition() {
+        if (sprite.x != _left) {
+            sprite.x = _left;
         }
 
-        return value;
+        if (sprite.y != _top) {
+            sprite.y = _top;
+        }
     }
-
+    
+    private function validateDisplay() {
+        if (_imageInfo != null) {
+            var scaleX:Float = _imageWidth / sprite.texture.width;
+            var scaleY:Float = _imageHeight / sprite.texture.height;
+            sprite.scale = new pixi.core.math.Point(scaleX, scaleY);
+        }
+    }
 }
