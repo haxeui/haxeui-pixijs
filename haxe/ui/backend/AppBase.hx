@@ -1,5 +1,6 @@
 package haxe.ui.backend;
 
+import haxe.ui.Preloader.PreloadItem;
 import js.Browser;
 import pixi.core.graphics.Graphics;
 import pixi.core.RenderOptions;
@@ -92,5 +93,9 @@ class AppBase {
         #end
 
         return renderer;
+    }
+    
+    private function buildPreloadList():Array<PreloadItem> {
+        return [];
     }
 }
