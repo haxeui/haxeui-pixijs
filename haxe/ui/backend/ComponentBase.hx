@@ -131,6 +131,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
     public function createTextDisplay(text:String = null):TextDisplay {
         if (_textDisplay == null) {
             _textDisplay = new TextDisplay();
+            _textDisplay.parentComponent = cast this;
             _textDisplay.textField.name = "text-display";
             addChild(_textDisplay.textField);
         }
@@ -153,6 +154,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
     public function createTextInput(text:String = null):TextInput {
         if (_textInput == null) {
             _textInput = new TextInput();
+            _textInput.parentComponent = cast this;
             _textInput.textField.name = "text-input";
             addChild(_textInput.textField);
         }

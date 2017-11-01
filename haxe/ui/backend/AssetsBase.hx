@@ -2,6 +2,7 @@ package haxe.ui.backend;
 
 import haxe.ui.assets.FontInfo;
 import haxe.ui.assets.ImageInfo;
+import haxe.ui.backend.pixi.util.FontDetect;
 import js.Browser;
 import pixi.core.textures.Texture;
 
@@ -72,7 +73,14 @@ class AssetsBase {
     }
 
     private function getFontInternal(resourceId:String, callback:FontInfo->Void):Void {
-        callback(null);
+        FontDetect.onFontLoaded(resourceId, function(f) {
+            var fontInfo = {
+                data: f
+            }
+            callback(fontInfo);
+        }, function(f) {
+            callback(null);
+        });
     }
 
     private function getFontFromHaxeResource(resourceId:String, callback:String->FontInfo->Void) {

@@ -1,6 +1,8 @@
 package haxe.ui.backend;
 
+import haxe.ui.assets.FontInfo;
 import haxe.ui.backend.pixi.HtmlUtils;
+import haxe.ui.core.Component;
 import haxe.ui.styles.Style;
 import pixi.core.text.Text;
 import pixi.core.text.TextStyle;
@@ -8,6 +10,7 @@ import pixi.core.text.TextStyle;
 class TextDisplayBase {
 
     public var textField:Text;
+    public var parentComponent:Component;
     
     public function new() {
         textField = new Text("");
@@ -25,7 +28,8 @@ class TextDisplayBase {
     private var _textStyle:Style;
     private var _multiline:Bool = true;
     private var _wordWrap:Bool = false;
-
+    private var _fontInfo:FontInfo = null;
+    
     //***********************************************************************************************************
     // Validation functions
     //***********************************************************************************************************
@@ -40,10 +44,18 @@ class TextDisplayBase {
         if (_textStyle.color != null) {
             textField.style.fill = HtmlUtils.color(_textStyle.color);
         }
+        
         if (_textStyle.fontName != null) {
             textField.style.fontFamily = _textStyle.fontName;
             measureTextRequired = true;
         }
+        
+        if (_fontInfo != null && _fontInfo.data != textField.style.fontFamily) {
+            textField.style.fontFamily = _fontInfo.data;
+            measureTextRequired = true;
+            parentComponent.invalidateLayout();
+        }
+
         if (_textStyle.fontSize != null) {
             textField.style.fontSize = Std.parseFloat(_textStyle.fontSize);
             measureTextRequired = true;
