@@ -9,6 +9,6 @@
     "contributors": ["haxeui", "ianharrigan", "_ibilon"],
     "dependencies": {
         "haxeui-core": "",
-        "pixi-haxe": ""
+        "pixijs": ""
     }
   }
