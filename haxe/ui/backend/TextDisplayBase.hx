@@ -57,7 +57,7 @@ class TextDisplayBase {
         }
 
         if (_textStyle.fontSize != null) {
-            textField.style.fontSize = Std.parseFloat(_textStyle.fontSize);
+            textField.style.fontSize = _textStyle.fontSize;
             measureTextRequired = true;
         }
         
@@ -76,6 +76,14 @@ class TextDisplayBase {
     }
     
     private function validateDisplay() {
+        if (textField.width != _width && _width > 0) {
+            textField.width = _width;
+        }
+
+        if (textField.height != _height && _height > 0) {
+            textField.height = _height;
+        }
+        textField.scale = new pixi.core.math.Point(1, 1);
     }
     
     private function measureText() {
