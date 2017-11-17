@@ -68,7 +68,6 @@ class PixiStyleHelper {
 
                 if (style.borderBottomSize != null && style.borderBottomSize > 0) {
                     graphics.beginFill(style.borderBottomColor);
-                    graphics.beginFill(style.borderBottomColor);
                     graphics.drawRect(0, height - 1, rc.width, 1);
                     graphics.endFill();
 
@@ -78,7 +77,7 @@ class PixiStyleHelper {
 
                 if (style.borderLeftSize != null && style.borderLeftSize > 0) {
                     graphics.beginFill(style.borderLeftColor);
-                    graphics.drawRect(0, 0, 1, rc.height + 1);
+                    graphics.drawRect(0, 1, 1, rc.height);
                     graphics.endFill();
 
                     borderSize.left = 1;
@@ -174,10 +173,10 @@ class PixiStyleHelper {
 
         if (hasBorder == true || hasFill == true) {
             if (borderRadius == 0) {
-                graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height - 1);
             } else {
                 //graphics.drawRoundedRect(rc.left, rc.top, rc.width, rc.height, borderRadius);
-                graphics.drawRect(rc.left, rc.top, rc.width, rc.height); // looks better
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height - 1); // looks better
             }
         }
 
