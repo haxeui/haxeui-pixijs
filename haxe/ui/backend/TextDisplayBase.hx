@@ -3,19 +3,20 @@ package haxe.ui.backend;
 import haxe.ui.assets.FontInfo;
 import haxe.ui.backend.pixi.HtmlUtils;
 import haxe.ui.core.Component;
+import haxe.ui.core.TextDisplay.TextDisplayData;
 import haxe.ui.styles.Style;
 import pixi.core.text.Text;
-import pixi.core.text.TextStyle;
 
 class TextDisplayBase {
+    private var _displayData:TextDisplayData = new TextDisplayData();
 
     public var textField:Text;
     public var parentComponent:Component;
     
     public function new() {
         textField = new Text("");
+        textField.style.fontSize = 13;
         textField.scale = new pixi.core.math.Point(1, 1);
-        //this.style.wordWrap = true;
     }
 
     private var _text:String;
@@ -26,8 +27,6 @@ class TextDisplayBase {
     private var _textWidth:Float = 0;
     private var _textHeight:Float = 0;
     private var _textStyle:Style;
-    private var _multiline:Bool = true;
-    private var _wordWrap:Bool = false;
     private var _fontInfo:FontInfo = null;
     
     //***********************************************************************************************************
@@ -35,11 +34,15 @@ class TextDisplayBase {
     //***********************************************************************************************************
 
     private function validateData() {
-        textField.text = _text;
+        textField.text = normalizeText(_text);
     }
     
     private function validateStyle():Bool {
-        var measureTextRequired:Bool = true;
+        if (_textStyle == null) {
+            return false;
+        }
+        
+        var measureTextRequired:Bool = false;
         
         if (_textStyle.color != null) {
             textField.style.fill = HtmlUtils.color(_textStyle.color);
@@ -57,13 +60,12 @@ class TextDisplayBase {
         }
 
         if (_textStyle.fontSize != null) {
-            textField.style.fontSize = Std.parseFloat(_textStyle.fontSize);
+            textField.style.fontSize = _textStyle.fontSize.toFloat();
             measureTextRequired = true;
         }
         
-        if (textField.style.wordWrap != _wordWrap) {
-            textField.style.wordWrap = _wordWrap;
-
+        if (textField.style.wordWrap != _displayData.wordWrap) {
+            textField.style.wordWrap = _displayData.wordWrap;
             measureTextRequired = true;
         }
 
@@ -76,10 +78,26 @@ class TextDisplayBase {
     }
     
     private function validateDisplay() {
+        if (textField.width != _width && _width > 0) {
+            textField.width = _width;
+        }
+
+        if (textField.height != _height && _height > 0) {
+            textField.height = _height;
+        }
+        textField.scale = new pixi.core.math.Point(1, 1);
     }
     
     private function measureText() {
         _textWidth = textField.width;
         _textHeight = textField.height;
+    }
+    
+    private function normalizeText(text:String):String {
+        if (text == null) {
+            return text;
+        }
+        text = StringTools.replace(text, "\\n", "\n");
+        return text;
     }
 }
