@@ -33,8 +33,8 @@ class ScreenBase {
         return 72;
     }
 
-    public var options(get, set):Dynamic;
-    private function get_options():Dynamic {
+    public var options(get, set):ToolkitOptions;
+    private function get_options():ToolkitOptions {
         return null;
     }
 
@@ -51,7 +51,7 @@ class ScreenBase {
         return Std.is(renderer, pixi.core.renderers.canvas.CanvasRenderer);
     }
 
-    private function set_options(value:Dynamic):Dynamic {
+    private function set_options(value:ToolkitOptions):ToolkitOptions {
         if (value != null && value.stage != null) {
             _stage = value.stage;
             _stage.interactive = true;
