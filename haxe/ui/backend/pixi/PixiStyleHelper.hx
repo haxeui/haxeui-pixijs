@@ -174,10 +174,10 @@ class PixiStyleHelper {
 
         if (hasBorder == true || hasFill == true) {
             if (borderRadius == 0) {
-                graphics.drawRect(rc.left, rc.top, rc.width, rc.height);
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height - 1);
             } else {
                 //graphics.drawRoundedRect(rc.left, rc.top, rc.width, rc.height, borderRadius);
-                graphics.drawRect(rc.left, rc.top, rc.width, rc.height); // looks better
+                graphics.drawRect(rc.left, rc.top, rc.width, rc.height - 1); // looks better
             }
         }
 
