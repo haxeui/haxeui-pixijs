@@ -92,8 +92,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
     private var _mask:Graphics;
     private function handleClipRect(value:Rectangle):Void {
         if (value != null) {
-            this.x = -value.left + 1;
-            this.y = -value.top + 1;
+            this.x = -value.left;
+            this.y = -value.top;
             if (_mask == null) {
                 _mask = new Graphics();
                 addChild(_mask);
@@ -217,9 +217,19 @@ class ComponentBase extends HaxeUIPixiGraphics {
         return child;
     }
 
+    private function handleAddComponentAt(child:Component, index:Int):Component {
+        addChildAt(child, index);
+        return child;
+    }
+
     private function handleRemoveComponent(child:Component, dispose:Bool = true):Component {
         removeChild(child);
         return child;
+    }
+
+    private function handleRemoveComponentAt(index:Int, dispose:Bool = true):Component {
+        removeChildAt(index);
+        return null;
     }
 
     private function handleVisibility(show:Bool):Void {
