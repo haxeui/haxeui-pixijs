@@ -32,8 +32,8 @@ class ComponentBase extends HaxeUIPixiGraphics {
         this.removeListener("added", onAdded);
         var component:Component = cast(this, Component);
         component.ready();
-        component.invalidateComponentStyle();
-        component.invalidateComponentLayout();
+        component.invalidateStyle();
+        component.invalidateLayout();
         for (child in component.childComponents) {
             child.recursiveReady();
         }

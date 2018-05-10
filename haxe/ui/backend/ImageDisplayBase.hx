@@ -25,7 +25,7 @@ class ImageDisplayBase {
     
     public function dispose():Void {
         if (sprite.texture != null) {
-            //sprite.texture.destroy();
+            sprite.texture.destroy();
             _imageInfo = null;
         }
     }

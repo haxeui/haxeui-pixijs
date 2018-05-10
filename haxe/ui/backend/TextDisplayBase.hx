@@ -56,7 +56,7 @@ class TextDisplayBase {
         if (_fontInfo != null && _fontInfo.data != textField.style.fontFamily) {
             textField.style.fontFamily = _fontInfo.data;
             measureTextRequired = true;
-            parentComponent.invalidateComponentLayout();
+            parentComponent.invalidateLayout();
         }
 
         if (_textStyle.fontSize != null) {
