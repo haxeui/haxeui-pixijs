@@ -25,8 +25,8 @@ class ImageDisplayBase {
     
     public function dispose():Void {
         if (sprite.texture != null) {
-            //sprite.texture.destroy();
-            //_imageInfo = null;
+            sprite.texture.destroy();
+            _imageInfo = null;
         }
     }
 
@@ -37,8 +37,12 @@ class ImageDisplayBase {
     private function validateData() {
         if (_imageInfo != null) {
             sprite.texture = _imageInfo.data;
-            _imageWidth = _imageInfo.width;
-            _imageHeight = _imageInfo.height;
+            if (_imageWidth <= 0) {
+                _imageWidth = _imageInfo.width;
+            }
+            if (_imageHeight <= 0) {
+                _imageHeight = _imageInfo.height;
+            }
             aspectRatio = _imageInfo.width / _imageInfo.height;
         }
     }

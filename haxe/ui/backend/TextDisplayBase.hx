@@ -60,7 +60,7 @@ class TextDisplayBase {
         }
 
         if (_textStyle.fontSize != null) {
-            textField.style.fontSize = _textStyle.fontSize.toFloat();
+            textField.style.fontSize = _textStyle.fontSize;
             measureTextRequired = true;
         }
         
@@ -69,6 +69,14 @@ class TextDisplayBase {
             measureTextRequired = true;
         }
 
+        if (textField.style.fontWeight != "bold" && _textStyle.fontBold == true) {
+            textField.style.fontWeight = "bold";
+        }
+        
+        if (textField.style.fontStyle != "italic" && _textStyle.fontItalic == true) {
+            textField.style.fontStyle = "italic";
+        }
+        
         return measureTextRequired;
     }
     
