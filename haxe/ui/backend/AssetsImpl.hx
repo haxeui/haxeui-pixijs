@@ -3,21 +3,13 @@ package haxe.ui.backend;
 import haxe.io.Bytes;
 import haxe.ui.assets.FontInfo;
 import haxe.ui.assets.ImageInfo;
+import haxe.ui.backend.AssetsBase;
 import haxe.ui.backend.pixi.util.FontDetect;
 import js.Browser;
 import pixi.core.textures.Texture;
 
-class AssetsBase {
-    public function new() {
-
-    }
-
-    private function getTextDelegate(resourceId:String):String {
-        return null;
-    }
-
-
-    private function getImageInternal(resourceId:String, callback:ImageInfo->Void):Void {
+class AssetsImpl extends AssetsBase {
+    private override function getImageInternal(resourceId:String, callback:ImageInfo->Void):Void {
         var bytes = Resource.getBytes(resourceId);
         if (bytes != null) {
             callback(null);
@@ -47,14 +39,14 @@ class AssetsBase {
         image.src = resourceId;
     }
 
-    private function getImageFromHaxeResource(resourceId:String, callback:String->ImageInfo->Void) {
+    private override function getImageFromHaxeResource(resourceId:String, callback:String->ImageInfo->Void) {
         var bytes = Resource.getBytes(resourceId);
         imageFromBytes(bytes, function(imageInfo) {
             callback(resourceId, imageInfo);
         });
     }
 
-    public function imageFromBytes(bytes:Bytes, callback:ImageInfo->Void) {
+    public override function imageFromBytes(bytes:Bytes, callback:ImageInfo->Void) {
         var image = Browser.document.createImageElement();
         var base64:String = haxe.crypto.Base64.encode(bytes);
         image.onload = function(e) {
@@ -79,7 +71,7 @@ class AssetsBase {
         image.src = "data:;base64," + base64;
     }
     
-    private function getFontInternal(resourceId:String, callback:FontInfo->Void):Void {
+    private override function getFontInternal(resourceId:String, callback:FontInfo->Void):Void {
         FontDetect.onFontLoaded(resourceId, function(f) {
             var fontInfo = {
                 data: f
@@ -90,7 +82,7 @@ class AssetsBase {
         });
     }
 
-    private function getFontFromHaxeResource(resourceId:String, callback:String->FontInfo->Void) {
+    private override function getFontFromHaxeResource(resourceId:String, callback:String->FontInfo->Void) {
         callback(resourceId, null);
     }
 }

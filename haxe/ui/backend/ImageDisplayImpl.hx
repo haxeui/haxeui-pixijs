@@ -1,29 +1,21 @@
 package haxe.ui.backend;
 
-import haxe.ui.util.Rectangle;
 import haxe.ui.assets.ImageInfo;
 import haxe.ui.core.Component;
+import haxe.ui.geom.Rectangle;
 import js.html.*;
 import pixi.core.sprites.Sprite;
 
 
-class ImageDisplayBase {
-    public var parentComponent:Component;
-    public var aspectRatio:Float = 1; // width x height
+class ImageDisplayImpl extends ImageBase {
     public var sprite:Sprite;
     
     public function new() {
+        super();
         sprite = new Sprite();
     }
 
-    private var _left:Float = 0;
-    private var _top:Float = 0;
-    private var _imageWidth:Float = 0;
-    private var _imageHeight:Float = 0;
-    private var _imageInfo:ImageInfo;
-    private var _imageClipRect:Rectangle;
-    
-    public function dispose():Void {
+    public override function dispose():Void {
         if (sprite.texture != null) {
             sprite.texture.destroy();
             _imageInfo = null;
@@ -34,7 +26,7 @@ class ImageDisplayBase {
     // Validation functions
     //***********************************************************************************************************
 
-    private function validateData() {
+    private override function validateData() {
         if (_imageInfo != null) {
             sprite.texture = _imageInfo.data;
             if (_imageWidth <= 0) {
@@ -47,7 +39,7 @@ class ImageDisplayBase {
         }
     }
     
-    private function validatePosition() {
+    private override function validatePosition() {
         if (sprite.x != _left) {
             sprite.x = _left;
         }
@@ -57,7 +49,7 @@ class ImageDisplayBase {
         }
     }
     
-    private function validateDisplay() {
+    private override function validateDisplay() {
         if (_imageInfo != null) {
             var scaleX:Float = _imageWidth / sprite.texture.width;
             var scaleY:Float = _imageHeight / sprite.texture.height;

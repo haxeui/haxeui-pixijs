@@ -1,6 +1,7 @@
 package haxe.ui.backend;
 
 import haxe.ui.Preloader.PreloadItem;
+import haxe.ui.backend.AppBase;
 import js.Browser;
 import pixi.core.graphics.Graphics;
 import pixi.core.RenderOptions;
@@ -9,14 +10,14 @@ import pixi.core.renderers.SystemRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 
-class AppBase {
+class AppImpl extends AppBase {
     var _renderer:SystemRenderer;
     var _stage:Graphics;
 
     public function new() {
     }
 
-    private function build() {
+    private override function build() {
         var width:Int = Toolkit.backendProperties.getPropInt("haxe.ui.pixi.width", 800);
         var height:Int = Toolkit.backendProperties.getPropInt("haxe.ui.pixi.height", 600);
 
@@ -38,24 +39,16 @@ class AppBase {
         Browser.window.requestAnimationFrame(cast _render);
     }
 
-    private function init(callback:Void->Void, onEnd:Void->Void = null) {
-        callback();
-    }
-
     function _render() {
         Browser.window.requestAnimationFrame(cast _render);
         _renderer.render(_stage);
     }
 
-    private function getToolkitInit():Dynamic {
+    private override function getToolkitInit():ToolkitOptions {
         return {
             stage: _stage,
             renderer: _renderer
         };
-    }
-
-    public function start() {
-
     }
 
     private static inline function parseCol(s:String):Int {
@@ -93,9 +86,5 @@ class AppBase {
         #end
 
         return renderer;
-    }
-    
-    private function buildPreloadList():Array<PreloadItem> {
-        return [];
     }
 }

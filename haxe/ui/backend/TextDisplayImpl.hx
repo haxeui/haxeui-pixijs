@@ -7,37 +7,26 @@ import haxe.ui.core.TextDisplay.TextDisplayData;
 import haxe.ui.styles.Style;
 import pixi.core.text.Text;
 
-class TextDisplayBase {
-    private var _displayData:TextDisplayData = new TextDisplayData();
+class TextDisplayImpl extends TextBase {
 
     public var textField:Text;
-    public var parentComponent:Component;
     
     public function new() {
+        super();
         textField = new Text("");
         textField.style.fontSize = 13;
         textField.scale = new pixi.core.math.Point(1, 1);
     }
 
-    private var _text:String;
-    private var _left:Float = 0;
-    private var _top:Float = 0;
-    private var _width:Float = 0;
-    private var _height:Float = 0;
-    private var _textWidth:Float = 0;
-    private var _textHeight:Float = 0;
-    private var _textStyle:Style;
-    private var _fontInfo:FontInfo = null;
-    
     //***********************************************************************************************************
     // Validation functions
     //***********************************************************************************************************
 
-    private function validateData() {
+    private override function validateData() {
         textField.text = normalizeText(_text);
     }
     
-    private function validateStyle():Bool {
+    private override function validateStyle():Bool {
         if (_textStyle == null) {
             return false;
         }
@@ -80,12 +69,12 @@ class TextDisplayBase {
         return measureTextRequired;
     }
     
-    private function validatePosition() {
+    private override function validatePosition() {
         textField.x = _left;
         textField.y = _top;
     }
     
-    private function validateDisplay() {
+    private override function validateDisplay() {
         if (textField.width != _width && _width > 0) {
             textField.width = _width;
         }
@@ -96,7 +85,7 @@ class TextDisplayBase {
         textField.scale = new pixi.core.math.Point(1, 1);
     }
     
-    private function measureText() {
+    private override function measureText() {
         _textWidth = textField.width;
         _textHeight = textField.height;
     }

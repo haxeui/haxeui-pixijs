@@ -2,19 +2,19 @@ package haxe.ui.backend;
 
 import haxe.ui.core.Component;
 import haxe.ui.core.ImageDisplay;
-import haxe.ui.core.MouseEvent;
 import haxe.ui.core.TextDisplay;
 import haxe.ui.core.TextInput;
-import haxe.ui.core.UIEvent;
+import haxe.ui.events.MouseEvent;
+import haxe.ui.events.UIEvent;
 import haxe.ui.backend.pixi.EventMapper;
 import haxe.ui.backend.pixi.HaxeUIPixiGraphics;
 import haxe.ui.backend.pixi.PixiStyleHelper;
 import haxe.ui.styles.Style;
-import haxe.ui.util.Rectangle;
+import haxe.ui.geom.Rectangle;
 import pixi.core.display.DisplayObject;
 import pixi.core.graphics.Graphics;
 
-class ComponentBase extends HaxeUIPixiGraphics {
+class ComponentImpl extends ComponentBase {
     private var _eventMap:Map<String, UIEvent->Void>;
 
     public function new() {
@@ -39,11 +39,11 @@ class ComponentBase extends HaxeUIPixiGraphics {
         }
     }
 
-    private function handleCreate(native:Bool):Void {
+    private override function handleCreate(native:Bool):Void {
         this.addListener("added", onAdded);
     }
 
-    private function handlePosition(left:Null<Float>, top:Null<Float>, style:Style):Void {
+    private override function handlePosition(left:Null<Float>, top:Null<Float>, style:Style):Void {
         if (left != null) {
             this.x = left;
         }
@@ -52,7 +52,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
         }
     }
 
-    private function handleSize(width:Null<Float>, height:Null<Float>, style:Style) {
+    private override function handleSize(width:Null<Float>, height:Null<Float>, style:Style) {
         if (width == null || height == null || width == 0 || height == 0) {
             return;
         }
@@ -90,7 +90,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
     }
 
     private var _mask:Graphics;
-    private function handleClipRect(value:Rectangle):Void {
+    private override function handleClipRect(value:Rectangle):Void {
         if (value != null) {
             this.x = -value.left;
             this.y = -value.top;
@@ -112,23 +112,10 @@ class ComponentBase extends HaxeUIPixiGraphics {
         }
     }
 
-    private function handleReady() {
-
-    }
-
-    private function handlePreReposition() {
-
-    }
-
-    private function handlePostReposition() {
-
-    }
-
     //***********************************************************************************************************
     // Text related
     //***********************************************************************************************************
-    private var _textDisplay:TextDisplay;
-    public function createTextDisplay(text:String = null):TextDisplay {
+    public override function createTextDisplay(text:String = null):TextDisplay {
         if (_textDisplay == null) {
             _textDisplay = new TextDisplay();
             _textDisplay.parentComponent = cast this;
@@ -142,16 +129,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
         return _textDisplay;
     }
 
-    public function getTextDisplay():TextDisplay {
-        return createTextDisplay();
-    }
-
-    public function hasTextDisplay():Bool {
-        return (_textDisplay != null);
-    }
-
-    private var _textInput:TextInput;
-    public function createTextInput(text:String = null):TextInput {
+    public override function createTextInput(text:String = null):TextInput {
         if (_textInput == null) {
             _textInput = new TextInput();
             _textInput.parentComponent = cast this;
@@ -164,19 +142,10 @@ class ComponentBase extends HaxeUIPixiGraphics {
         return _textInput;
     }
 
-    public function getTextInput():TextInput {
-        return createTextInput();
-    }
-
-    public function hasTextInput():Bool {
-        return (_textInput != null);
-    }
-
     //***********************************************************************************************************
     // Image related
     //***********************************************************************************************************
-    private var _imageDisplay:ImageDisplay;
-    public function createImageDisplay():ImageDisplay {
+    public override function createImageDisplay():ImageDisplay {
         if (_imageDisplay == null) {
             _imageDisplay = new ImageDisplay();
             _imageDisplay.sprite.name = "image-display";
@@ -190,16 +159,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
         return _imageDisplay;
     }
 
-    public function getImageDisplay():ImageDisplay {
-        return createImageDisplay();
-    }
-
-    public function hasImageDisplay():Bool {
-        return (_imageDisplay != null);
-    }
-
-
-    public function removeImageDisplay():Void {
+    public override function removeImageDisplay():Void {
         if (_imageDisplay != null) {
             if (getChildIndex(_imageDisplay.sprite) > -1) {
                 removeChild(_imageDisplay.sprite);
@@ -212,31 +172,31 @@ class ComponentBase extends HaxeUIPixiGraphics {
     //***********************************************************************************************************
     // Display tree
     //***********************************************************************************************************
-    private function handleAddComponent(child:Component):Component {
+    private override function handleAddComponent(child:Component):Component {
         addChild(child);
         return child;
     }
 
-    private function handleAddComponentAt(child:Component, index:Int):Component {
+    private override function handleAddComponentAt(child:Component, index:Int):Component {
         addChildAt(child, index);
         return child;
     }
 
-    private function handleRemoveComponent(child:Component, dispose:Bool = true):Component {
+    private override function handleRemoveComponent(child:Component, dispose:Bool = true):Component {
         removeChild(child);
         return child;
     }
 
-    private function handleRemoveComponentAt(index:Int, dispose:Bool = true):Component {
+    private override function handleRemoveComponentAt(index:Int, dispose:Bool = true):Component {
         removeChildAt(index);
         return null;
     }
 
-    private function handleVisibility(show:Bool):Void {
+    private override function handleVisibility(show:Bool):Void {
         this.visible = show;
     }
 
-    private function applyStyle(style:Style) {
+    private override function applyStyle(style:Style) {
         var useHandCursor = false;
         if (style.cursor != null && style.cursor == "pointer") {
             useHandCursor = true;
@@ -254,14 +214,10 @@ class ComponentBase extends HaxeUIPixiGraphics {
         }
     }
 
-    private function handleSetComponentIndex(child:Component, index:Int) {
-
-    }
-
     //***********************************************************************************************************
     // Events
     //***********************************************************************************************************
-    private function mapEvent(type:String, listener:UIEvent->Void) {
+    private override function mapEvent(type:String, listener:UIEvent->Void) {
         switch (type) {
             case MouseEvent.MOUSE_MOVE | MouseEvent.MOUSE_OVER | MouseEvent.MOUSE_OUT
                 | MouseEvent.MOUSE_DOWN | MouseEvent.MOUSE_UP | MouseEvent.CLICK:
@@ -278,7 +234,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
         }
     }
 
-    private function unmapEvent(type:String, listener:UIEvent->Void) {
+    private override function unmapEvent(type:String, listener:UIEvent->Void) {
         switch (type) {
             case MouseEvent.MOUSE_MOVE | MouseEvent.MOUSE_OVER | MouseEvent.MOUSE_OUT
                 | MouseEvent.MOUSE_DOWN | MouseEvent.MOUSE_UP | MouseEvent.CLICK:
@@ -299,7 +255,7 @@ class ComponentBase extends HaxeUIPixiGraphics {
         if (type != null) {
             var fn = _eventMap.get(type);
             if (fn != null) {
-                var mouseEvent = new haxe.ui.core.MouseEvent(type);
+                var mouseEvent = new haxe.ui.events.MouseEvent(type);
                 mouseEvent.screenX = event.data.global.x / Toolkit.scaleX;
                 mouseEvent.screenY = event.data.global.y / Toolkit.scaleY;
                 fn(mouseEvent);
