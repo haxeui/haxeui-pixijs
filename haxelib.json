@@ -1,14 +1,23 @@
 {
-    "name": "haxeui-pixijs",
-    "url": "https://github.com/haxeui/haxeui-pixijs",
-    "license": "MIT",
-    "tags": ["ui", "gui", "pixijs"],
-    "description": "The PixiJS backend of the HaxeUI framework",
-    "version": "0.0.2",
-    "releasenote": "Enhanced text input support",
-    "contributors": ["haxeui", "ianharrigan", "_ibilon", "aW4KeNiNG"],
+    "contributors": [
+        "haxeui",
+        "ianharrigan",
+        "_ibilon",
+        "aW4KeNiNG"
+    ],
+    "version": "1.0.0",
     "dependencies": {
         "haxeui-core": "",
         "pixijs": ""
-    }
-  }
+    },
+    "releasenote": "Official release",
+    "tags": [
+        "ui",
+        "gui",
+        "pixijs"
+    ],
+    "license": "MIT",
+    "name": "haxeui-pixijs",
+    "description": "The PixiJS backend of the HaxeUI framework",
+    "url": "https://github.com/haxeui/haxeui-pixijs"
+}
