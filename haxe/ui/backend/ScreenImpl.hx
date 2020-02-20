@@ -61,14 +61,16 @@ class ScreenImpl extends ScreenBase {
         return s;
     }
 
-    public override function addComponent(component:Component) {
+    public override function addComponent(component:Component):Component {
         component.scale.set(Toolkit.scaleX, Toolkit.scaleY);
         resizeComponent(component);
         _stage.addChild(component);
+		return component;
     }
 
-    public override function removeComponent(component:Component) {
+    public override function removeComponent(component:Component):Component {
         _stage.removeChild(component);
+		return component;
     }
 
     private override function resizeComponent(c:Component) {
