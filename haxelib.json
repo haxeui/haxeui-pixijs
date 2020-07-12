@@ -1,22 +1,22 @@
 {
+    "version": "1.1.0",
     "contributors": [
         "haxeui",
         "ianharrigan",
         "_ibilon",
         "aW4KeNiNG"
     ],
-    "version": "1.0.0",
-    "dependencies": {
-        "haxeui-core": "",
-        "pixijs": ""
-    },
-    "releasenote": "Official release",
+    "license": "MIT",
     "tags": [
         "ui",
         "gui",
         "pixijs"
     ],
-    "license": "MIT",
+    "releasenote": "1.1 release",
+    "dependencies": {
+        "haxeui-core": "",
+        "pixijs": ""
+    },
     "name": "haxeui-pixijs",
     "description": "The PixiJS backend of the HaxeUI framework",
     "url": "https://github.com/haxeui/haxeui-pixijs"
